@@ -9,17 +9,39 @@
         formControlName="nome"
         required
       />
-      <div class="mb-3">
-        <label for="exampleInputPassword1" class="form-label"
-          >Nickname: (solo minuscole)</label
-        >
-        <input
-          type="text"
-          class="form-control"
-          name="nickname"
-          formControlName="nickname"
-          required
-        />
+      <div
+        *ngIf="myForm.get('name').touched && myForm.get('name').invalid"
+        class="form-text text-danger"
+      >
+        Attenzione. il è un campo obbligatorio
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="exampleInputPassword1" class="form-label"
+        >Nickname: (solo minuscole)</label
+      >
+      <input
+        type="text"
+        class="form-control"
+        name="nickname"
+        formControlName="nickname"
+        required
+      />
+      <div
+        *ngIf="myForm.get('nickname').touched && myForm.get('nickname').invalid"
+        class="form-text text-danger"
+      >
+        Attenzione. errori nella compilazione nick name
+      </div>
+      <div
+        *ngIf="
+          myForm.get('nickname').touched &&
+          (myForm.get('nickname').hasError('minlength') ||
+            myForm.get('nickname').hasError('maxlength'))
+        "
+        class="form-text text-danger"
+      >
+        Attenzione. errori nella compilazione nick name
       </div>
     </div>
     <div formGroupName="account">
@@ -33,7 +55,10 @@
           required
         />
         <div
-          *ngIf="myForm.get('email').touched && myForm.get('email').invalid"
+          *ngIf="
+            myForm.get('account').get('email').touched &&
+            myForm.get('account').get('email').invalid
+          "
           class="form-text text-danger"
         >
           Attenzione. l'email è un campo obbligatorio
