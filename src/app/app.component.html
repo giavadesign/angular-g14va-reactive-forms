@@ -1,5 +1,5 @@
 <div class="container mt-5">
-  <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+  <form novalidate [formGroup]="myForm" (ngSubmit)="onSubmit()">
     <div class="mb-3">
       <label for="exampleInputPassword1" class="form-label">Nome</label>
       <input
@@ -9,32 +9,46 @@
         formControlName="nome"
         required
       />
-    </div>
-    <div class="mb-3">
-      <label for="exampleInputEmail1" class="form-label">Email address</label>
-      <input
-        type="email"
-        class="form-control"
-        name="email"
-        formControlName="email"
-        required
-      />
-      <div
-        *ngIf="myForm.get('email').touched && myForm.get('email').invalid"
-        class="form-text text-danger"
-      >
-        Attenzione. l'email è un campo obbligatorio
+      <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label"
+          >Nickname: (solo minuscole)</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          name="nickname"
+          formControlName="nickname"
+          required
+        />
       </div>
     </div>
-    <div class="mb-3">
-      <label for="exampleInputPassword1" class="form-label">Password</label>
-      <input
-        type="text"
-        class="form-control"
-        name="password"
-        formControlName="password"
-        required
-      />
+    <div formGroupName="account">
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Email address</label>
+        <input
+          type="email"
+          class="form-control"
+          name="email"
+          formControlName="email"
+          required
+        />
+        <div
+          *ngIf="myForm.get('email').touched && myForm.get('email').invalid"
+          class="form-text text-danger"
+        >
+          Attenzione. l'email è un campo obbligatorio
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">Password</label>
+        <input
+          type="text"
+          class="form-control"
+          name="password"
+          formControlName="password"
+          required
+        />
+      </div>
     </div>
     <button type="submit" class="btn btn-primary" [disabled]="myForm.invalid">
       Submit
