@@ -5,8 +5,8 @@
       <input
         type="text"
         class="form-control"
-        name="nome"
-        formControlName="nome"
+        name="name"
+        formControlName="name"
         required
       />
       <div
@@ -31,7 +31,7 @@
         *ngIf="myForm.get('nickname').touched && myForm.get('nickname').invalid"
         class="form-text text-danger"
       >
-        Attenzione. errori nella compilazione nick name
+        Attenzione. errori nella compilazione nickname
       </div>
       <div
         *ngIf="
@@ -73,6 +73,25 @@
           formControlName="password"
           required
         />
+        <div
+          *ngIf="
+            myForm.get('account').get('password').touched &&
+            myForm.get('account').get('password').invalid
+          "
+          class="form-text text-danger"
+        >
+          Attenzione. la password è un campo obbligatorio
+        </div>
+        <div
+          *ngIf="
+            myForm.get('account').get('password').touched &&
+            myForm.get('account').get('password').hasError('pattern')
+          "
+          class="form-text text-danger"
+        >
+          Attenzione. la password deve contenere almeno una maiuscola, almeno un
+          numero e deve essere compresa tra gli otto e i dodici caratteri.
+        </div>
       </div>
     </div>
     <button type="submit" class="btn btn-primary" [disabled]="myForm.invalid">

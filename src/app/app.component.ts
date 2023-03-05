@@ -11,7 +11,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.myForm = new FormGroup({
-      nome: new FormControl('Luca', Validators.required),
+      name: new FormControl('Luca', Validators.required),
       nickname: new FormControl(null, [
         Validators.required,
         Validators.minLength(8),
@@ -19,7 +19,16 @@ export class AppComponent implements OnInit {
       ]),
       account: new FormGroup({
         email: new FormControl(null, [Validators.required, Validators.email]),
-        password: new FormControl(null, [Validators.required]),
+        password: new FormControl(null, [
+          Validators.required,
+          /**
+           * custom validator con regex pattern
+           * minimo una lettera maiuscola
+           * almeno un numero
+           * minimo 8 max 12 caratteri
+           */
+          Validators.pattern(/^(?=.*[A-Z])(?=.*\d).{8,12}$/),
+        ]),
       }),
     });
   }
